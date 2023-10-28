@@ -1,0 +1,41 @@
+SCRIPT USED:-
+
+(1) Total PY sale:-
+         IF YEAR([Order Date])={MAX(YEAR([Order Date])}-1 THEN [Sales] END
+
+(2)YOY SALES:- (SUM([Total CY sale])-SUM([Total PY sale]))/SUM([Total PY sale])
+
+(3) Min Max month:-
+IF SUM([Total CY sale])=WINDOW_MAX(SUM([Total CY sale])) THEN SUM([Total CY sale]) ELSEIF SUM([Total CY sale])=WINDOW_MIN(SUM([Total CY sale])) THEN SUM([Total CY sale]) ELSE NULL END 
+
+(4)Total PY profit:
+IF YEAR([Order Date])={MAX(YEAR([Order Date]))} THEN [Profit] END
+
+(5)AVG Profit:-
+ { FIXED :AVG(IF YEAR([Order Date])={MAX(YEAR([Order Date]))}THEN [Total CY profit]END)}
+
+(6) AVG profit overall:
+{ FIXED :AVG(IF YEAR([Order Date])={MAX(YEAR([Order Date]))}THEN [Total CY profit]END)}
+
+(7) AVG profit statewise:
+{ FIXED [State/Province]:AVG([Total CY profit])}
+
+(8) AVG sale overall:-
+{ FIXED :AVG(IF YEAR([Order Date])={MAX(YEAR([Order Date]))}THEN [Total CY sale]END)}
+
+(9) AVG sale statewise:-
+{ FIXED [State/Province]:AVG([Total CY sale])}
+
+(10)Dynamic Measure:-
+ CASE [Select Measure]
+WHEN 'Total CY sales' THEN [Total CY sale]
+WHEN 'Total CY profit' THEN [Total CY profit]
+END
+
+(11) Total CY profit:-
+IF YEAR([Order Date])={MAX(YEAR([Order Date]))} THEN [Profit] END
+
+(12) Total CY sale:-
+IF YEAR([Order Date])={MAX(YEAR([Order Date]))} THEN [Sales] END
+
+(13) 
